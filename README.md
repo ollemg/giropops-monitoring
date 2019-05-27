@@ -1,4 +1,4 @@
-# giropops-monitoring
+# ollemg-monitoring
 Full stack tools for monitoring containers and other stuff. ;)
 - Netdata
 - Prometheus
@@ -8,11 +8,10 @@ Full stack tools for monitoring containers and other stuff. ;)
 - cAdvisor
 - Grafana
 - Node_Exporter
+- SNMP_Explorer
 
 
 # Install Demonstration
-
-[![demo](https://asciinema.org/a/P1LJ9GYTVamd9AwjJmVWLErqD.png)](https://asciinema.org/a/P1LJ9GYTVamd9AwjJmVWLErqD?speed=2&autoplay=1)
 
 
 # Howto
