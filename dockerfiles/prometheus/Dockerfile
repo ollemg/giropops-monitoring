@@ -21,8 +21,9 @@ RUN set -xe && \
     chown prometheus:prometheus /usr/local/bin/prometheus && \
     chown prometheus:prometheus /usr/local/bin/promtool && \
     chown -R prometheus:prometheus /etc/prometheus && \
-    chown prometheus:prometheus /var/lib/prometheus
-
+    chown -R prometheus:prometheus /var/lib/prometheus && \
+    chmod 777 /var/lib/prometheus
+    
 VOLUME /etc/prometheus
 
 VOLUME /var/lib/prometheus

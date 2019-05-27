@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   prometheus:
-    image: linuxtips/prometheus_alpine
+    image: ollemg/prometheus_alphine
     volumes:
       - ./conf/prometheus/:/etc/prometheus/
       - prometheus_data:/var/lib/prometheus
@@ -13,7 +13,7 @@ services:
       - 9090:9090
 
   node-exporter:
-    image: linuxtips/node-exporter_alpine
+    image: ollemg/node-exporter_alphine
     hostname: '{{.Node.ID}}'
     volumes:
       - /proc:/usr/proc
@@ -26,8 +26,15 @@ services:
     ports:
       - 9100:9100
 
+  snmp-exporter:
+    image: prom/snmp-exporter
+    networks:
+      - backend
+    ports:
+      - 9116:9116
+
   alertmanager:
-    image: linuxtips/alertmanager_alpine
+    image: ollemg/alertmanager_alphine
     volumes:
       - ./conf/alertmanager/:/etc/alertmanager/
     networks:

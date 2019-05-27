@@ -16,7 +16,7 @@ scrape_configs:
   - job_name: 'node'
     scrape_interval: 5s
     static_configs:
-         - targets: ['localhost:9090','ollemg_cadvisor:8080','ollemg_node-exporter:9100']
+         - targets: ['localhost:9090','ollemg_cadvisor:8080','ollemg_node-exporter:9100','ollemg_snmp-exporter:9116']
   - job_name: 'netdata'
     metrics_path: '/api/v1/allmetrics'
     params:
@@ -24,4 +24,4 @@ scrape_configs:
     honor_labels: true
     scrape_interval: 5s
     static_configs:
-         - targets: ['blackbull:19999']
+         - targets: ['172.20.0.26:19999']
