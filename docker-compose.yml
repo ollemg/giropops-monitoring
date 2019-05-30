@@ -14,7 +14,6 @@ services:
 
   node-exporter:
     image: ollemg/node-exporter_alphine
-    hostname: '{{.Node.ID}}'
     volumes:
       - /proc:/usr/proc
       - /sys:/usr/sys
@@ -44,7 +43,6 @@ services:
 
   cadvisor:
     image: google/cadvisor
-    hostname: '{{.Node.ID}}'
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
