@@ -10,7 +10,7 @@ alerting:
   - scheme: http
     static_configs:
     - targets:
-      - "ollemg.monitoring.local:9093"
+      - "ollemg_alertmanager:9093"
 
 scrape_configs:
   - job_name: 'Prometheus'
@@ -36,4 +36,12 @@ scrape_configs:
     honor_labels: true
     scrape_interval: 5s
     static_configs:
-         - targets: ['172.20.0.26:19999']
+         - targets: ['192.168.0.5:19999']
+  - job_name: 'client-vagrant'
+    metrics_path: '/api/v1/allmetrics'
+    params:
+      format: [prometheus]
+    honor_labels: true
+    scrape_interval: 5s
+    static_configs:
+         - targets: ['192.168.0.21:19999']

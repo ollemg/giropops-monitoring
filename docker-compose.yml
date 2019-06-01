@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   prometheus:
-    image: ollemg/prometheus_alphine
+    image: ollemg/prometheus_alpine
     volumes:
       - ./conf/prometheus/:/etc/prometheus/
       - prometheus_data:/var/lib/prometheus
@@ -13,7 +13,7 @@ services:
       - 9090:9090
 
   node-exporter:
-    image: ollemg/node-exporter_alphine
+    image: ollemg/node-exporter_alpine
     volumes:
       - /proc:/usr/proc
       - /sys:/usr/sys
@@ -33,7 +33,7 @@ services:
       - 9116:9116
 
   alertmanager:
-    image: ollemg/alertmanager_alphine
+    image: ollemg/alertmanager_alpine
     volumes:
       - ./conf/alertmanager/:/etc/alertmanager/
     networks:
