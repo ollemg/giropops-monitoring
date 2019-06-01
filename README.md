@@ -17,7 +17,7 @@ Full stack tools for monitoring containers and other stuff. ;)
 # Howto
 First of all, clone the ollemg-monitoring repo:
 ```
-# git clone https://github.com/badtuxx/giropops-monitoring.git
+# git clone https://github.com/ollemg/ollemg-monitoring.git
 ```
 
 ## Install Docker and create Swarm cluster
