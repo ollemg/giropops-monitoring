@@ -1,13 +1,29 @@
 route:
+    group_by: [alertname, job]
     receiver: 'slack'
 
 receivers:
     - name: 'slack'
       slack_configs:
           - send_resolved: true
-            title: '{{ template "custom_title" . }}'
-            text: '{{ template "custom_slack_message" . }}'
+            # title: '{{ template "custom_title" . }}'
+            # text: '{{ template "custom_slack_message" . }}'
             username: 'gabrielmello808@gmail.com'
             channel: '#monitoramento'
             api_url: 'https://hooks.slack.com/services/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'
-            icon_url: https://avatars3.githubusercontent.com/u/3380462
+            icon_url: 'https://avatars3.githubusercontent.com/u/3380462'
+            color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+            title: '{{ template "slack.default.title" . }}'
+            title_link: '{{ template "slack.default.titlelink" . }}'
+            pretext: '{{ .CommonAnnotations.summary }}'
+            text: |-
+              {{ range .Alerts }}
+                *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+                *Description:* {{ .Annotations.description }}
+                *summary:* {{ .Annotations.sumary }}
+                *Details:*
+                {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                {{ end }}
+              {{ end }}
+            fallback: '{{ template "slack.default.fallback" . }}'
+            icon_emoji: '{{ template "slack.default.iconemoji" . }}'

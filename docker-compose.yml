@@ -8,12 +8,14 @@ services:
       - ./conf/prometheus/:/etc/prometheus/
       - prometheus_data:/var/lib/prometheus
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.100
     ports:
       - 9090:9090
 
   node-exporter:
     image: ollemg/node-exporter_alpine
+    hostname: '{{.Node.ID}}'
     volumes:
       - /proc:/usr/proc
       - /sys:/usr/sys
@@ -21,28 +23,34 @@ services:
     deploy:
       mode: global
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.101
     ports:
       - 9100:9100
 
   snmp-exporter:
     image: prom/snmp-exporter
+    hostname: '{{.Node.ID}}'
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.102
     ports:
       - 9116:9116
 
   alertmanager:
     image: ollemg/alertmanager_alpine
+    hostname: '{{.Node.ID}}'
     volumes:
       - ./conf/alertmanager/:/etc/alertmanager/
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.103
     ports:
       - 9093:9093
 
   cadvisor:
     image: google/cadvisor
+    hostname: '{{.Node.ID}}'
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -50,7 +58,8 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.104
     deploy:
       mode: global
     ports:
@@ -65,14 +74,24 @@ services:
     env_file:
       - grafana.config
     networks:
-      - backend
-      - frontend
+      backend:
+        ipv4_address: 172.20.0.105
+      frontend:
+        ipv4_address: 192.168.0.100
     ports:
       - 3000:3000
 
 networks:
   frontend:
+    ipam:
+        driver: default
+        config:
+            - subnet: 192.168.0.0/24
   backend:
+    ipam:
+        driver: default
+        config:
+            - subnet: 172.20.0.0/24
 
 volumes:
     prometheus_data:

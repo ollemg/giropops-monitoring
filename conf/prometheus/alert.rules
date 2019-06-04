@@ -1,22 +1,49 @@
 groups:
-- name: example
+- name: Alertas
   rules:
-
   # Alert for any instance that is unreachable for >5 minutes.
-  - alert: service_down
+  - alert: servico_de_monitoramento_offline
     expr: up == 0
-    for: 2m
+    for: 1m
     labels:
       severity: page
     annotations:
-      summary: "Instance {{ $labels.instance }} down"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+      summary: "Instancia {{ $labels.instance }} Inacecivel ou desligada"
+      description: "{{ $labels.instance }} do trabalho {{ $labels.job }} Esta fora por mais de 2 minutos"
 
-  - alert: high_load
+  - alert: Load_alto_1min
     expr: node_load1 > 0.5
-    for: 2m
+    for: 30s
     labels:
-      severity: page
+      severity: major
     annotations:
-      summary: "Instance {{ $labels.instance }} under high load"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+      summary: "Load do host esta alto por mais de 1min"
+      description: "Load do host esta alto por mais de 1min"
+  
+  - alert: Load_alto_5min
+    expr: node_load5 > 1
+    for: 3m
+    labels:
+      severity: major
+    annotations:
+      summary: "Load do host esta alto por mais de 5min"
+      description: "Load do host esta alto por mais de 5min"
+
+  - alert: Load_alto_15min
+    expr: node_load15 > 1.5
+    for: 10m
+    labels:
+      severity: major
+    annotations:
+      summary: "Load do host esta alto por mais de 15min"
+      description: "Load do host esta alto por mais de 15min"
+
+  - alert: falta_de_memoria_no_host
+    expr: netdata_mem_available_MiB_average < 3000
+    for: 30s
+    labels:
+      severity: major
+    annotations:
+      summary: "Consumo de RAM alto"
+      description: "Consumo de RAM alto"
+  

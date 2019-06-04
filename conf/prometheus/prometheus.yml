@@ -17,11 +17,15 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_prometheus:9090']
+  - job_name: 'AlertManager'
+    scrape_interval: 5s
+    static_configs:
+        - targets: ['ollemg_alertmanager:9093']
   - job_name: 'Cdvisor'
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_cadvisor:8080']
-  - job_name: 'NODE'
+  - job_name: 'NODE' 
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_node-exporter:9100']
@@ -29,7 +33,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_snmp-exporter:9116']
-  - job_name: 'netdata'
+  - job_name: 'Netdata'
     metrics_path: '/api/v1/allmetrics'
     params:
       format: [prometheus]
@@ -37,11 +41,3 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
          - targets: ['192.168.0.5:19999']
-  - job_name: 'client-vagrant'
-    metrics_path: '/api/v1/allmetrics'
-    params:
-      format: [prometheus]
-    honor_labels: true
-    scrape_interval: 5s
-    static_configs:
-         - targets: ['192.168.0.21:19999']
