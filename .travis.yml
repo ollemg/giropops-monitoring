@@ -1,0 +1,14 @@
+language: ruby
+
+services:
+  - docker
+
+before_install:
+- docker pull ollemg/alertmanager_alpine
+- docker container run -d --name alertmanager -p 9093:9093 ollemg/alertmanager_alpine
+- docker container logs alertmanager
+- docker ps -a
+- docker rm alertmanager
+
+script:
+- 
