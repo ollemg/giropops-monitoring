@@ -53,9 +53,6 @@ Creating service ollemg_node-exporter
 Creating service ollemg_alertmanager
 Creating service ollemg_cadvisor
 Creating service ollemg_grafana
-Creating service ollemg_rocketchat
-Creating service ollemg_mongo
-Creating service ollemg_mongo-init-replica
 ```
 
 Verify if services are ok:
