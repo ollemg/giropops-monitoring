@@ -3,16 +3,11 @@ Full stack tools for monitoring containers and other stuff. ;)
 - Netdata
 - Prometheus
 - AlertManager
-- Rocket.Chat
 - Docker
 - cAdvisor
 - Grafana
 - Node_Exporter
 - SNMP_Explorer
-
-
-# Install Demonstration
-
 
 # Howto
 First of all, clone the ollemg-monitoring repo:
@@ -91,7 +86,7 @@ To access Grafana interface on browser:
 ```
 http://127.0.0.1:3000
 user: admin
-passwd: giropops
+passwd: ollemg
 
 To add plugs edit file giropops-monitoring/grafana.config
 GF_INSTALL_PLUGINS=plug1,plug2
