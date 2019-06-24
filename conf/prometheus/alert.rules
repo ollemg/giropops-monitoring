@@ -8,8 +8,8 @@ groups:
     labels:
       severity: page
     annotations:
-      summary: "Instancia {{ $labels.instance }} Inacecivel ou desligada"
-      description: "{{ $labels.instance }} do trabalho {{ $labels.job }} Esta fora por mais de 2 minutos"
+      summary: "o Cliente {{ $labels.instance }} Inacecivel ou desligada"
+      description: "o monitoramento {{ $labels.job }} Esta fora por mais de 2 minutos"
 
   - alert: Load_alto_1min
     expr: node_load1 > 0.5

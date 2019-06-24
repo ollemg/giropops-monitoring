@@ -9,7 +9,6 @@ services:
       - prometheus_data:/var/lib/prometheus
     networks:
       backend:
-        ipv4_address: 172.20.0.100
     ports:
       - 9090:9090
 
@@ -24,18 +23,17 @@ services:
       mode: global
     networks:
       backend:
-        ipv4_address: 172.20.0.101
     ports:
       - 9100:9100
 
-  snmp-exporter:
-    image: prom/snmp-exporter
-    hostname: '{{.Node.ID}}'
-    networks:
-      backend:
-        ipv4_address: 172.20.0.102
-    ports:
-      - 9116:9116
+  # snmp-exporter:
+  #   image: prom/snmp-exporter
+  #   hostname: '{{.Node.ID}}'
+  #   networks:
+  #     backend:
+  #       ipv4_address: 172.20.0.102
+  #   ports:
+  #     - 9116:9116
 
   alertmanager:
     image: ollemg/alertmanager_alpine
@@ -44,7 +42,6 @@ services:
       - ./conf/alertmanager/:/etc/alertmanager/
     networks:
       backend:
-        ipv4_address: 172.20.0.103
     ports:
       - 9093:9093
 
@@ -59,7 +56,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       backend:
-        ipv4_address: 172.20.0.104
     deploy:
       mode: global
     ports:
@@ -75,24 +71,53 @@ services:
       - grafana.config
     networks:
       backend:
-        ipv4_address: 172.20.0.105
       frontend:
-        ipv4_address: 192.168.0.100
     ports:
       - 3000:3000
 
+  agent:
+    image: portainer/agent
+    environment:
+      # REQUIRED: Should be equal to the service name prefixed by "tasks." when
+      # deployed inside an overlay network
+      AGENT_CLUSTER_ADDR: tasks.agent
+      # AGENT_PORT: 9001
+      # LOG_LEVEL: debug
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - agent_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+
+  portainer:
+    image: portainer/portainer
+    command: -H tcp://tasks.agent:9001 --tlsskipverify
+    ports:
+      - "9000:9000"
+    volumes:
+      - portainer_data:/data
+    networks:
+      - agent_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
 networks:
   frontend:
-    ipam:
-        driver: default
-        config:
-            - subnet: 192.168.0.0/24
+    driver: overlay
   backend:
-    ipam:
-        driver: default
-        config:
-            - subnet: 172.20.0.0/24
+    driver: overlay
+  agent_network:
+    driver: overlay
+    attachable: true
 
 volumes:
     prometheus_data:
     grafana_data:
+    portainer_data:
