@@ -82,7 +82,7 @@ http://127.0.0.1:9093
 To access Grafana interface on browser:
 ```
 http://127.0.0.1:3000
-user: admin
+user: ollemg
 passwd: ollemg
 
 To add plugs edit file giropops-monitoring/grafana.config
