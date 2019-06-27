@@ -11,7 +11,7 @@ groups:
       description: "o monitoramento {{ $labels.job }} Esta fora por mais de 2 minutos"
 
   - alert: Load_alto_1min
-    expr: node_load1 > 0.5
+    expr: node_load1 > 4
     for: 30s
     labels:
       severity: major
@@ -20,7 +20,7 @@ groups:
       description: "Load do host esta alto por mais de 1min"
   
   - alert: Load_alto_5min
-    expr: node_load5 > 1
+    expr: node_load5 > 8
     for: 3m
     labels:
       severity: major
@@ -29,7 +29,7 @@ groups:
       description: "Load do host esta alto por mais de 5min"
 
   - alert: Load_alto_15min
-    expr: node_load15 > 1.5
+    expr: node_load15 > 10
     for: 10m
     labels:
       severity: major
@@ -47,7 +47,7 @@ groups:
       description: "Consumo de RAM alto"
 
   - alert: diretorio_home_quase_cheio
-    expr: netdata_disk_space_GiB_average{chart="disk_space._home",dimension="avail",family="/home",instance="192.168.5.106:19999",job="Netdata"} < 340.000
+    expr: netdata_disk_space_GiB_average{chart="disk_space._home",dimension="avail",family="/home",instance="172.20.0.26:19999",job="Netdata"} < 340.000
     for: 1m
     labels:
       severity: major
