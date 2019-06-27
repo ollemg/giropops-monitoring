@@ -17,6 +17,10 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_prometheus:9090']
+  - job_name: 'Grafana'
+    scrape_interval: 5s
+    static_configs:
+        - targets: ['ollemg_grafana:3000']
   - job_name: 'AlertManager'
     scrape_interval: 5s
     static_configs:
