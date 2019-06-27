@@ -1,7 +1,6 @@
 groups:
 - name: Alertas
   rules:
-  # Alert for any instance that is unreachable for >5 minutes.
   - alert: servico_de_monitoramento_offline
     expr: up == 0
     for: 1m

@@ -26,15 +26,6 @@ services:
     ports:
       - 9100:9100
 
-  # snmp-exporter:
-  #   image: prom/snmp-exporter
-  #   hostname: '{{.Node.ID}}'
-  #   networks:
-  #     backend:
-  #       ipv4_address: 172.20.0.102
-  #   ports:
-  #     - 9116:9116
-
   alertmanager:
     image: ollemg/alertmanager_alpine
     hostname: '{{.Node.ID}}'
@@ -78,11 +69,7 @@ services:
   agent:
     image: portainer/agent
     environment:
-      # REQUIRED: Should be equal to the service name prefixed by "tasks." when
-      # deployed inside an overlay network
       AGENT_CLUSTER_ADDR: tasks.agent
-      # AGENT_PORT: 9001
-      # LOG_LEVEL: debug
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
