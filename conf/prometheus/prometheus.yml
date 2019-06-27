@@ -21,7 +21,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_alertmanager:9093']
-  - job_name: 'Cdvisor'
+  - job_name: 'cAdvisor'
     scrape_interval: 5s
     static_configs:
         - targets: ['ollemg_cadvisor:8080']
@@ -41,7 +41,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
          - targets: ['172.20.0.26:19999']
-  - job_name: 'alpine'
+  - job_name: 'Alpine'
     metrics_path: '/api/v1/allmetrics'
     params:
       format: [prometheus]
