@@ -8,6 +8,8 @@ services:
       - ./conf/prometheus/:/etc/prometheus/
       - prometheus_data:/var/lib/prometheus
     networks:
+    deploy:
+      mode: replicated
       backend:
     ports:
       - 9090:9090
@@ -31,6 +33,8 @@ services:
     hostname: '{{.Node.ID}}'
     volumes:
       - ./conf/alertmanager/:/etc/alertmanager/
+    deploy:
+      mode: global
     networks:
       backend:
     ports:
@@ -60,6 +64,8 @@ services:
       - ./conf/grafana/grafana.db:/grafana/data/grafana.db
     env_file:
       - grafana.config
+    deploy:
+      mode: replicated
     networks:
       backend:
       frontend:
