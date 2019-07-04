@@ -8,9 +8,9 @@ services:
       - ./conf/prometheus/:/etc/prometheus/
       - prometheus_data:/var/lib/prometheus
     networks:
+      backend:
     deploy:
       mode: replicated
-      backend:
     ports:
       - 9090:9090
 
