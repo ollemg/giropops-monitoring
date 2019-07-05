@@ -44,7 +44,7 @@ scrape_configs:
     honor_labels: true
     scrape_interval: 5s
     static_configs:
-         - targets: ['172.16.101.31:19999']
+         - targets: ['192.168.43.21:19999']
   - job_name: 'Alpine'
     metrics_path: '/api/v1/allmetrics'
     params:
@@ -52,5 +52,5 @@ scrape_configs:
     honor_labels: true
     scrape_interval: 5s
     static_configs:
-         - targets: ['172.20.0.23:19999']
+         - targets: ['192.168.43.167:19999']
 
