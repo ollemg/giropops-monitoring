@@ -61,15 +61,12 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - /var/lib/grafana/
-      # - ./conf/grafana/grafana.db:/var/lib/grafana/grafana.db
+      - grafana_data:/var/lib/grafana
     env_file:
       - grafana.config
-    deploy:
-      mode: replicated
     networks:
-      backend:
-      frontend:
+      - backend
+      - frontend
     ports:
       - 3000:3000
 
