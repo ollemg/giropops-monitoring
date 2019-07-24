@@ -47,7 +47,7 @@ groups:
       description: "Consumo de RAM alto"
 
   - alert: diretorio_home_quase_cheio
-    expr: netdata_disk_space_GiB_average{chart="disk_space._home",dimension="avail",family="/home",instance="172.20.0.26:19999",job="Netdata"} < 340.000
+    expr: netdata_disk_space_GiB_average{chart="disk_space._home",dimension="avail",family="/home",instance="192.168.43.21:19999",job="Netdata"} < 340.000
     for: 1m
     labels:
       severity: major

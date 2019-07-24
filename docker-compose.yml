@@ -57,7 +57,7 @@ services:
       - 8080:8080
 
   grafana:
-    image: nopp/grafana_alpine
+    image: grafana/grafana
     depends_on:
       - prometheus
     volumes:
