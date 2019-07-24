@@ -61,7 +61,7 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - ./conf/grafana/grafana.db:/grafana/data/grafana.db
+      - ./conf/grafana/grafana.db:/var/lib/grafana/grafana.db
     env_file:
       - grafana.config
     deploy:
