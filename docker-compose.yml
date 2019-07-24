@@ -65,8 +65,7 @@ services:
     env_file:
       - grafana.config
     networks:
-      - backend
-      - frontend
+      backend:
     ports:
       - 3000:3000
 
