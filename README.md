@@ -41,7 +41,7 @@ Setting Netdata Exporter configuration in Prometheus:
 ```
 ## Deploy Stack with Docker Swarm
 
-Execute deploy to create the stack of giropops-monitoring:
+Execute deploy to create the stack of ollemg-monitoring:
 ```
 # docker stack deploy -c docker-compose.yml ollemg
 
@@ -85,7 +85,7 @@ http://127.0.0.1:3000
 user: ollemg
 passwd: ollemg
 
-To add plugs edit file giropops-monitoring/grafana.config
+To add plugs edit file ollemg-monitoring/grafana.config
 GF_INSTALL_PLUGINS=plug1,plug2
 Current plugs grafana-clock-panel,grafana-piechart-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel
 ```
