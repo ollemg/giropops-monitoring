@@ -1,5 +1,4 @@
 # ollemg-monitoring
-Full stack tools for monitoring containers and other stuff. ;)
 - Netdata
 - Prometheus
 - AlertManager
@@ -9,24 +8,23 @@ Full stack tools for monitoring containers and other stuff. ;)
 - Node_Exporter
 - SNMP_Explorer
 
-# Howto
-First of all, clone the ollemg-monitoring repo:
+## 1:
 ```
 # git clone https://github.com/ollemg/ollemg-monitoring.git
 ```
 
-## Install Docker and create Swarm cluster
+## 2:
 ```
 # curl -fsSL https://get.docker.com | sh
 # docker swarm init
 ```
 
-## Install Netdata:
+## 3:
 ```
 # bash <(curl -Ss https://my-netdata.io/kickstart.sh)
 ```
 
-Setting Netdata Exporter configuration in Prometheus:
+## 4:
 ```
 # vim conf/prometheus/prometheus.yml
 ...
@@ -39,9 +37,7 @@ Setting Netdata Exporter configuration in Prometheus:
     static_configs:
          - targets: ['YOUR_IP:19999']
 ```
-## Deploy Stack with Docker Swarm
-
-Execute deploy to create the stack of ollemg-monitoring:
+## 5:
 ```
 # docker stack deploy -c docker-compose.yml ollemg
 
@@ -55,7 +51,7 @@ Creating service ollemg_cadvisor
 Creating service ollemg_grafana
 ```
 
-Verify if services are ok:
+## Como ficou:
 ```
 # docker service ls
 ID               NAME                   MODE            REPLICAS      IMAGE                                PORTS
@@ -67,19 +63,19 @@ z5x6rl9w7fw2     ollemg_grafana         replicated      1/1           nopp/grafa
 mpnjl3bipmti     ollemg_snmp-exporter   replicated      1/1           prom/snmp-exporter:latest            *:9116->9116/tcp
 
 ```
-## Access Services in Browser
+## Acessos:
 
-To access Prometheus interface on browser:
+Prometheus:
 ```
 http://127.0.0.1:9090
 ```
 
-To access AlertManager interface on browser:
+AlertManager:
 ```
 http://127.0.0.1:9093
 ```
 
-To access Grafana interface on browser:
+Grafana:
 ```
 http://127.0.0.1:3000
 user: ollemg
@@ -89,14 +85,12 @@ To add plugs edit file ollemg-monitoring/grafana.config
 GF_INSTALL_PLUGINS=plug1,plug2
 Current plugs grafana-clock-panel,grafana-piechart-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel
 ```
-Get fun, access the dashboards! ;)
-
-To access Netdata interface on browser:
+Netdata:
 ```
 http://127.0.0.1:19999
 ```
 
-To access Prometheus Node_exporter metrics on browser:
+Node_exporter:
 ```
 http://127.0.0.1:9100/metrics
 ```
