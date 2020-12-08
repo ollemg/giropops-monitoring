@@ -1,4 +1,6 @@
-# ollemg-monitoring
+# Repositório utilizado para apresentar um trabalho na faculdade
+
+#ollemg-monitoring
 - Netdata
 - Prometheus
 - AlertManager
